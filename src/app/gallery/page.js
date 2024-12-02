@@ -22,7 +22,6 @@ function Gallery() {
           setData(response.data.result);
         }
       } catch (err) {
-
         // If user is not authenticated, redirect to home page
         if (err.status === 401) {
           console.log("response->", err);
@@ -36,25 +35,47 @@ function Gallery() {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-semibold mb-4">Year and Month List</h1>
-      <ul className="space-y-4">
-        {data.map((item, index) => (
-          <li key={item.id} id={item.id} className=" p-4 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-gray-900">{item.name}</h2>
-            <Link href={{ pathname: "/docDetail", query: { code: item.id } }}>
-              {item.name}
-            </Link>
-            {/* <ul className="mt-2 space-y-2">
-              {item.month.map((month, idx) => (
-                <li key={idx} className=" mt-1 truncate text-lg text-gray-500 cursor-pointer">                  
-                  <Link href="/">{month.split("|")[0]}</Link>
-                </li>
-              ))}
-            </ul> */}
-          </li>
-        ))}
-      </ul>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="container mx-auto p-4 max-w-4xl">
+        <h1 className="text-3xl font-bold text-center mb-6 text-indigo-700">
+          Year and Month List
+        </h1>
+        <ul className="space-y-4">
+          {data.map((item, index) => (
+            <li
+              key={item.id}
+              id={item.id}
+              className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+                {item.name}
+              </h2>
+              <Link
+                href={{ pathname: "/docDetail", query: { code: item.id } }}
+                className="text-indigo-600 text-lg underline hover:text-indigo-800 transition-colors"
+              >
+                View Details
+              </Link>
+
+              {/* Uncomment and modify this section if required */}
+              {/* 
+          <ul className="mt-4 space-y-2">
+            {item.month.map((month, idx) => (
+              <li
+                key={idx}
+                className="mt-1 truncate text-lg text-gray-500 cursor-pointer"
+              >
+                <Link href="/" className="hover:text-indigo-600 transition-colors">
+                  {month.split("|")[0]}
+                </Link>
+              </li>
+            ))}
+          </ul> 
+          */}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
